@@ -55,14 +55,35 @@ namespace addressbook_tests_autoit
                             "Select", "#0|#" + p, "");
         }
 
+       
+
         public void Add(GroupData newGroup)
         {
             OpenGroupsDialog();
             aux.ControlClick(GROUPWINTITLE, "", "WindowsForms10.BUTTON.app.0.2c908d53"); // click on New button
             aux.Send(newGroup.Name);
-            aux.Send("{ENTER}"); //imulition of enter press
+            aux.Send("{ENTER}"); //emulation of enter press
             CloseGroupsDialog();
 
+        }
+
+         public void CheckItemsExists(int p)
+        {
+           if ((aux.ControlTreeView(
+                            GROUPWINTITLE, "", "WindowsForms10.SysTreeView32.app.0.2c908d51",
+                            "Select", "#0|#0", "")) == null)
+            {
+                for (int i = 0; i < p; i++)
+                {
+                    GroupData newGroup = new GroupData()
+                    {
+                        Name = "testo"+i
+                    };
+                    Add(newGroup);
+                }
+                
+
+            }
         }
 
         private void CloseGroupsDialog()

@@ -9,6 +9,8 @@ namespace addressbook_tests_autoit
         [Test]
         public void GroupRemovalTest()
         {
+            app.Groups.CheckItemsExists();
+
             List<GroupData> oldGroups = app.Groups.GetGroupList();
             GroupData groupToDel = oldGroups[0];
 
